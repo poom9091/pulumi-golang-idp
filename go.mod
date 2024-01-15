@@ -3,6 +3,7 @@ module github.com/poom90914/pulumi_golang
 go 1.21.6
 
 require (
+	github.com/gin-gonic/gin v1.9.1
 	github.com/gorilla/mux v1.8.1
 	github.com/pulumi/pulumi-aws/sdk v1.31.0
 	github.com/pulumi/pulumi-aws/sdk/v4 v4.38.1
@@ -35,7 +36,6 @@ require (
 	github.com/fsnotify/fsnotify v1.5.4 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.3 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
-	github.com/gin-gonic/gin v1.9.1 // indirect
 	github.com/go-git/gcfg v1.5.1-0.20230307220236-3a3c6141e376 // indirect
 	github.com/go-git/go-billy/v5 v5.5.0 // indirect
 	github.com/go-git/go-git/v5 v5.11.0 // indirect

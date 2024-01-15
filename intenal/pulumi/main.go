@@ -2,7 +2,7 @@ package pulumi
 
 import (
 	"github.com/pulumi/pulumi-aws/sdk/go/aws/s3"
-	"github.com/pulumi/pulumi/sdk/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // this function defines our pulumi S3 static website in terms of the content that the caller passes in.

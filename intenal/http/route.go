@@ -6,6 +6,7 @@ import (
 
 func NewRouter() *gin.Engine {
 	r := gin.Default()
-	r.GET("/ping", listHandlerfunc)
+	r.GET("/sites", listHandler)
+	r.POST("/sites", createHandler)
 	return r
 }

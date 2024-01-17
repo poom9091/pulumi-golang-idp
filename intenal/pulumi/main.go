@@ -21,38 +21,39 @@ func CreatePulumiProgram(content string) pulumi.RunFunc {
 		}
 
 		// here our HTML is defined based on what the caller curries in.
-		indexContent := content
-		// upload our index.html
-		if _, err := s3.NewBucketObject(ctx, "index", &s3.BucketObjectArgs{
-			Bucket:      siteBucket.ID(), // reference to the s3.Bucket object
-			Content:     pulumi.String(indexContent),
-			Key:         pulumi.String("index.html"),               // set the key of the object
-			ContentType: pulumi.String("text/html; charset=utf-8"), // set the MIME type of the file
-		}); err != nil {
-			return err
-		}
+		// indexContent := content
+
+		// // upload our index.html
+		// if _, err := s3.NewBucketObject(ctx, "index", &s3.BucketObjectArgs{
+		// 	Bucket:      siteBucket.ID(), // reference to the s3.Bucket object
+		// 	Content:     pulumi.String(indexContent),
+		// 	Key:         pulumi.String("index.html"),               // set the key of the object
+		// 	ContentType: pulumi.String("text/html; charset=utf-8"), // set the MIME type of the file
+		// }); err != nil {
+		// 	return err
+		// }
 
 		// Set the access policy for the bucket so all objects are readable.
-		if _, err := s3.NewBucketPolicy(ctx, "bucketPolicy", &s3.BucketPolicyArgs{
-			Bucket: siteBucket.ID(), // refer to the bucket created earlier
-			Policy: pulumi.Any(map[string]interface{}{
-				"Version": "2012-10-17",
-				"Statement": []map[string]interface{}{
-					{
-						"Effect":    "Allow",
-						"Principal": "*",
-						"Action": []interface{}{
-							"s3:GetObject",
-						},
-						"Resource": []interface{}{
-							pulumi.Sprintf("arn:aws:s3:::%s/*", siteBucket.ID()), // policy refers to bucket name explicitly
-						},
-					},
-				},
-			}),
-		}); err != nil {
-			return err
-		}
+		// if _, err := s3.NewBucketPolicy(ctx, "bucketPolicy", &s3.BucketPolicyArgs{
+		// 	Bucket: siteBucket.ID(), // refer to the bucket created earlier
+		// 	Policy: pulumi.Any(map[string]interface{}{
+		// 		"Version": "2012-10-17",
+		// 		"Statement": []map[string]interface{}{
+		// 			{
+		// 				"Effect":    "Allow",
+		// 				"Principal": "*",
+		// 				"Action": []interface{}{
+		// 					"s3:GetObject",
+		// 				},
+		// 				"Resource": []interface{}{
+		// 					pulumi.Sprintf("arn:aws:s3:::%s/*", siteBucket.ID()), // policy refers to bucket name explicitly
+		// 				},
+		// 			},
+		// 		},
+		// 	}),
+		// }); err != nil {
+		// 	return err
+		// }
 
 		// export the website URL
 		ctx.Export("websiteUrl", siteBucket.WebsiteEndpoint)
